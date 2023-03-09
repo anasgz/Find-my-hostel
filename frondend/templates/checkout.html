@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <title>Bootstrap 5 Checkout Form Example</title>-->
+    <!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+
+	<!-- Demo CSS (No need to include it into your project) -->
+	<link rel="stylesheet" href="{% static 'checkout/css/demo.css' %}">
+    <!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!--===============================================================================================-->
+
+  </head>
+  <body>
+
+<!-- <header class="intro">-->
+<!-- <h1> Bootstrap 5 Checkout Form Example </h1>-->
+<!-- <p> A checkout form page with Bootstrap native input fields.</p>-->
+
+<!-- <div class="action">-->
+<!-- <a href="https://www.codehim.com/bootstrap/bootstrap-forms/bootstrap-5-checkout-form-page/" title="Back to download and tutorial page" class="btn back">Back to Tutorial</a>-->
+
+<!-- </div>-->
+
+<!-- </header>-->
+
+ <main>
+
+     <!-- DEMO HTML -->
+     <div class="container">
+  <div class="py-5 text-center">
+
+    <h2>Checkout form</h2>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted">Your cart</span>
+        <span class="badge badge-secondary badge-pill">3</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0"></h6>
+            <small class="text-muted">ADVANCE</small>
+          </div>
+          <span class="item-price">500</span>
+        </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0"></h6>
+            <small class="text-muted">SERVICE</small>
+          </div>
+          <span>40</span>
+        </li>
+<!--        <li class="list-group-item d-flex justify-content-between lh-condensed">-->
+<!--          <div>-->
+<!--            <h6 class="my-0">Second product</h6>-->
+<!--            <small class="text-muted">Brief description</small>-->
+<!--          </div>-->
+<!--          <span class="text-muted">$8</span>-->
+<!--        </li>-->
+<!--        <li class="list-group-item d-flex justify-content-between lh-condensed">-->
+<!--          <div>-->
+<!--            <h6 class="my-0">Third item</h6>-->
+<!--            <small class="text-muted">Brief description</small>-->
+<!--          </div>-->
+<!--          <span class="text-muted">$5</span>-->
+<!--        </li>-->
+<!--        <li class="list-group-item d-flex justify-content-between bg-light">-->
+<!--          <div class="text-success">-->
+<!--            <h6 class="my-0">Promo code</h6>-->
+<!--            <small>EXAMPLECODE</small>-->
+<!--          </div>-->
+<!--          <span class="text-success">-$5</span>-->
+<!--        </li>-->
+        <li class="list-group-item d-flex justify-content-between">
+          <span>TOTAL </span>
+          <strong id="totalPrice">540</strong>
+        </li>
+      </ul>
+
+
+    </div>
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Billing address</h4>
+      <form class="needs-validation" action="{% url 'chkoutdb' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" name="name" required>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+             <input type="hidden" placeholder="" value="540" name="total">
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="" value="">
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+
+			   <div class="col-md-6 mb-3">
+				   {% for d in data %}
+<!--				   <label for="lastName">PdtName</label>-->
+            <input type="hidden" name="pdtname" class="form-control" id="pdtname" placeholder="" value="{{d.NAME}}">
+<!--            <label for="lastName">prize</label>-->
+            <input type="hidden" name="prize" class="form-control" id="prize" placeholder="" value="{{d.PRIZE}}">
+				   {% endfor %}
+
+          </div>
+        </div>
+
+
+<!--        <div class="mb-3">-->
+<!--          <label for="username">Username</label>-->
+<!--          <div class="input-group">-->
+<!--            <div class="input-group-prepend">-->
+<!--              <span class="input-group-text">@</span>-->
+<!--            </div>-->
+<!--            <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>-->
+<!--            <div class="invalid-feedback" style="width: 100%;">-->
+<!--              Your username is required.-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <div class="mb-3">
+          <label for="email">Email </label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" placeholder="1234 Main St" name="address" required>
+          <div class="invalid-feedback">
+            Please enter your shipping address.
+          </div>
+        </div>
+
+<!--        <div class="mb-3">-->
+<!--          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>-->
+<!--          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">-->
+<!--        </div>-->
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="country">State</label>
+            <input type="text"  class="form-control" id="country" required>
+          </div>
+            <div class="col-md-5 mb-3">
+            <label for="country">District</label>
+            <input type="text"  class="form-control" id="district" required>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="zip">Pincode</label>
+            <input type="text" class="form-control" id="zip" name="pincode" placeholder="" required>
+            <div class="invalid-feedback">
+              Pin code required.
+            </div>
+          </div>
+        </div>
+<!--        <hr class="mb-4">-->
+<!--		  <p>How old are you?</p>-->
+<!--<input type="radio" id="child" name="age" value="child">-->
+<!--<label for="child">17 years or younger</label><br>-->
+<!--<input type="radio" id="adult" name="age" value="adult">-->
+<!--<label for="adult">18 - 64 years</label><br>-->
+<!--<input type="radio" id="senior" name="age" value="senior">-->
+<!--<label for="senior">65 years or older</label>-->
+
+<!--        <div class="custom-control custom-checkbox">-->
+<!--          <input type="checkbox" class="custom-control-input" id="same-address">-->
+<!--          <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>-->
+<!--        </div>-->
+<!--        <div class="custom-control custom-checkbox">-->
+<!--          <input type="checkbox" class="custom-control-input" id="save-info">-->
+<!--          <label class="custom-control-label" for="save-info">Save this information for next time</label>-->
+<!--        </div>-->
+        <hr class="mb-4">
+
+        <h4 class="mb-3">Payment</h4>
+  <div>
+  <fieldset>
+    <legend>Please select your preferred Payment method:</legend>
+    <div>
+      <input type="radio" id="contactChoice1" name="contact" value="email" />
+      <label for="contactChoice1">Debit card</label>
+
+      <input type="radio" id="contactChoice2" name="contact" value="phone" />
+      <label for="contactChoice2">Credit card</label>
+
+
+    </div>
+  </fieldset>
+	  </div>
+
+
+
+<!--        <div class="d-block my-3">-->
+<!--          <div class="custom-control custom-radio">-->
+<!--            <input  name="paymentMethod" type="radio" class="custom-control-input" checked >-->
+<!--            <label class="custom-control-label" >Credit card</label>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-radio">-->
+<!--            <input  name="paymentMethod" type="radio" class="custom-control-input">-->
+<!--            <label class="custom-control-label">Debit card</label>-->
+<!--          </div>-->
+<!--          <div class="custom-control custom-radio">-->
+<!--            <input name="paymentMethod" type="radio" class="custom-control-input">-->
+<!--            <label class="custom-control-label">Cash on Delivery</label>-->
+<!--          </div>-->
+<!--        </div>-->
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="cc-name">Name on card</label>
+            <input type="text" class="form-control" id="cc-name" placeholder="" >
+            <small class="text-muted">Full name as displayed on card</small>
+            <div class="invalid-feedback">
+              Name on card is required
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cc-number"> Card number</label>
+            <input type="text" class="form-control" id="cc-number"name="cardnumber" placeholder="" >
+            <div class="invalid-feedback">
+              Credit card number is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <label for="cc-expiration">Expiration</label>
+            <input type="text" class="form-control" id="cc-expiration" placeholder="">
+            <div class="invalid-feedback">
+              Expiration date required
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="cc-cvv">CVV</label>
+            <input type="text" class="form-control" id="cc-cvv" placeholder="">
+            <div class="invalid-feedback">
+              Security code required
+            </div>
+          </div>
+        </div>
+        <hr class="mb-4">
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Proceed</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2023 - 2030 Vogues</p>
+<!--    <ul class="list-inline">-->
+<!--      <li class="list-inline-item"><a href="#">Privacy</a></li>-->
+<!--      <li class="list-inline-item"><a href="#">Terms</a></li>-->
+<!--      <li class="list-inline-item"><a href="#">Support</a></li>-->
+<!--    </ul>-->
+  </footer>
+</div>
+     <!-- End Demo HTML -->
+
+ </main>
+
+  <footer class="credit">Author: Manasseh El Bey - Distributed By: <a title="Awesome web design code & scripts" href="https://www.codehim.com?source=demo-page" target="_blank">CodeHim</a></footer>
+
+<!-- Bootstrap 5 JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <script>
+// Get a reference to the Calculate Total button and the Total Price paragraph
+var calculateButton = document.getElementById("calculateTotal");
+var totalPriceElement = document.getElementById("totalPrice");
+
+// Add a click event listener to the Calculate Total button
+calculateButton.addEventListener("mouseover", function() {
+  // Get all the item prices
+  var itemPrices = document.getElementsByClassName("item-price");
+
+  // Loop through the item prices and calculate the total price
+  var totalPrice = 40 ;
+
+  for (var i = 0; i < itemPrices.length; i++) {
+    totalPrice += parseFloat(itemPrices[i].innerHTML);
+  }
+
+  // Update the Total Price element with the calculated total price
+  totalPriceElement.innerHTML =totalPrice.toFixed(2);
+});
+
+</script>
+    <!--===============================================================================================-->
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+	<script src="{% static 'js/slick-custom.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+	<script>
+		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'js/main.js' %}"></script>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+   {% if messages %}
+  {% for message in messages %}
+
+   {% if message.tags == 'warning' %}
+   <script>
+     swal('{{message}}','','warning');
+   </script>
+
+   {% elif message.tags == 'error' %}
+   <script>
+     swal('{{message}}','','error');
+   </script>
+
+   {% else%}
+   <script>
+     swal('{{message}}','','success');
+   </script>
+
+   {% endif %}
+
+   {% endfor %} {% endif %}
+  </body>
+</html>
